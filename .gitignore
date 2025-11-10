@@ -1,0 +1,11 @@
+.vs/
+.vscode/
+.zed/
+.fleet/
+.idea/
+.cache/
+
+build/
+sandbox/
+
+.DS_Store

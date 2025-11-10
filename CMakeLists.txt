@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(libtja CXX)
+
+include(FetchContent)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(TTFS_BUILD_SANDBOX OFF CACHE BOOL "" FORCE)
+
+FetchContent_Declare(
+  ttfs
+  GIT_REPOSITORY https://github.com/Hato1125/ttfs.git
+  GIT_TAG main
+)
+FetchContent_MakeAvailable(ttfs)
+
+add_library(libtja INTERFACE)
+
+target_link_libraries(libtja INTERFACE ttfs)
+target_include_directories(libtja INTERFACE
+  ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+set(SANDBOX_DIR ${CMAKE_SOURCE_DIR}/sandbox)
+set(SANDBOX_CMAKELISTS ${SANDBOX_DIR}/CMakeLists.txt)
+
+if(EXISTS ${SANDBOX_DIR} AND EXISTS ${SANDBOX_CMAKELISTS})
+  message("ttrrruuueee")
+  add_subdirectory(${SANDBOX_DIR})
+endif()
