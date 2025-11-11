@@ -16,19 +16,27 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/Hato1125/ttfs.git
   GIT_TAG main
 )
-FetchContent_MakeAvailable(ttfs)
+
+FetchContent_Declare(
+  simde
+  GIT_REPOSITORY https://github.com/simd-everywhere/simde.git
+  GIT_TAG master
+)
+
+FetchContent_MakeAvailable(ttfs simde)
 
 add_library(libtja INTERFACE)
 
 target_link_libraries(libtja INTERFACE ttfs)
+
 target_include_directories(libtja INTERFACE
   ${CMAKE_CURRENT_SOURCE_DIR}/src
+  ${simde_SOURCE_DIR}
 )
 
 set(SANDBOX_DIR ${CMAKE_SOURCE_DIR}/sandbox)
 set(SANDBOX_CMAKELISTS ${SANDBOX_DIR}/CMakeLists.txt)
 
 if(EXISTS ${SANDBOX_DIR} AND EXISTS ${SANDBOX_CMAKELISTS})
-  message("ttrrruuueee")
   add_subdirectory(${SANDBOX_DIR})
 endif()
