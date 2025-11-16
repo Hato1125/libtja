@@ -34,6 +34,11 @@ target_include_directories(libtja INTERFACE
   ${simde_SOURCE_DIR}
 )
 
+target_compile_definitions(libtja INTERFACE
+  $<$<CONFIG:Debug>:DEBUG_BUILD>
+  $<$<CONFIG:Release>:RELEASE_BUILD>
+)
+
 set(SANDBOX_DIR ${CMAKE_SOURCE_DIR}/sandbox)
 set(SANDBOX_CMAKELISTS ${SANDBOX_DIR}/CMakeLists.txt)
 
